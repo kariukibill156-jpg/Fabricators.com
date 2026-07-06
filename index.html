@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billy Agalla Fabricators & Kitchen Appliances</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Core Configurations & Reset */
+        :root {
+            --primary: #00bcd4; /* Brand Cyan */
+            --dark: #111111;
+            --light-grey: #f9f9f9;
+            --border-color: #eaeaea;
+            --success: #25d366; /* WhatsApp Green */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+            padding-bottom: 70px; /* Space for the bottom navigation bar */
+            overflow-x: hidden;
+        }
+
+        /* Site Header */
+        .site-header {
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark);
+        }
+
+        .site-logo {
+            text-align: center;
+        }
+
+        .site-logo a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .site-logo .logo-bold {
+            font-weight: 900;
+        }
+
+        .site-logo small {
+            display: block;
+            font-size: 9px;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .icon-link {
+            color: #333;
+            font-size: 18px;
+            position: relative;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* Interactive Sidebar Navigation Menu */
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--dark);
+            color: #fff;
+            z-index: 2000;
+            transition: left 0.3s ease-in-out;
+            padding: 30px 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-menu.open {
+            left: 0;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            float: right;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-brand {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .sidebar-brand h3 {
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-brand small {
+            color: var(--primary);
+            font-size: 10px;
+            display: block;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-links li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+
+        .sidebar-links li a:hover {
+            color: var(--primary);
+        }
+
+        /* Overlay for drawers */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .menu-overlay.show {
+            display: block;
+        }
+
+        /* Layout Wrapper */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 40px 0;
+        }
+
+        /* Product Section */
+        .breadcrumbs {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumbs a {
+            color: #777;
+            text-decoration: none;
+        }
+
+        /* Gallery System */
+        .product-gallery {
+            flex: 1;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            border: 1px solid #f0f0f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .product-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-thumbnails {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .thumb-img.active {
+            border-color: var(--primary);
+        }
+
+        /* Product Details Elements */
+        .product-details {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .specs-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .specs-table td:first-child {
+            font-weight: bold;
+            color: #666;
+            width: 35%;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background-color: var(--dark);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--primary);
+        }
+
+        /* Dynamic Sliding Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -340px;
+            width: 340px;
+            height: 100%;
+            background: #fff;
+            z-index: 2000;
+            transition: right 0.3s ease-in-out;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-drawer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart-drawer-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .cart-empty-msg {
+            text-align: center;
+            color: #888;
+            margin-top: 40px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-info p {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: #ff3333;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .cart-drawer-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background: var(--light-grey);
+        }
+
+        .cart-total-display {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Order Payable Setup (Payment Mode Selection) */
+        .payment-options-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .payment-icons-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .payment-method-card {
+            flex: 1;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background: white;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .payment-method-card i {
+            font-size: 20px;
+            color: #555;
+        }
+
+        .payment-method-card span {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .payment-method-card.selected {
+            border-color: var(--primary);
+            background: rgba(0, 188, 212, 0.05);
+        }
+
+        .payment-method-card.selected i {
+            color: var(--primary);
+        }
+
+        .checkout-action-btn {
+            width: 100%;
+            background: #7cb342;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .checkout-action-btn:hover {
+            background: #689f38;
+        }
+
+        /* FAQ Accordion Section */
+        .faq-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 18px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .accordion-header i {
+            transition: transform 0.2s ease;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .accordion-content p {
+            padding-bottom: 18px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-item.active .accordion-header {
+            color: var(--primary);
+        }
+
+        /* Footer Elements */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+        }
+
+        #contactForm input, #contactForm textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #contactForm input:focus, #contactForm textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary);
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-bold {
+            font-weight: 900;
+        }
+
+        .footer-logo small {
+            display: block;
+            font-size: 10px;
+            color: var(--primary);
+        }
+
+        .about-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .contact-info-list {
+            list-style: none;
+        }
+
+        .contact-info-list li {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info-list i {
+            color: var(--primary);
+            width: 16px;
+        }
+
+        /* Sticky Bottom Bar Nav */
+        .sticky-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 999;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            position: relative;
+            width: 25%;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .badge-nav {
+            position: absolute;
+            top: -4px;
+            right: 28%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 9px;
+            padding: 1px 5px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            text-decoration: none;
+            z-index: 998;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-widget:hover {
+            transform: scale(1.05);
+        }
+
+        /* Desktop Grid Responsiveness Adjustment */
+        @media (min-width: 768px) {
+            .product-container {
+                display: flex;
+                gap: 50px;
+                align-items: flex-start;
+                margin-top: 20px;
+            }
+            .product-gallery {
+                flex: 1.2;
+            }
+            .product-details {
+                flex: 1;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic System Layer Elements -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Interactive Sidebar Menu Drawer -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu-btn" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
+        <div class="sidebar-brand">
+            <h3>BILL AGALLA</h3>
+            <small>FABRICATORS & APPLIANCES</small>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#" class="menu-link-item"><i class="fa-solid fa-house"></i> Home / Shop</a></li>
+            <li><a href="#" class="menu-link-item"><i class="fa-solid fa-fire"></i> Gas Burners</a></li>
+            <li><a href="#" class="menu-link-item"><i class="fa-solid fa-sheet-plastic"></i> Stainless Worktables</a></li>
+            <li><a href="#" class="menu-link-item"><i class="fa-solid fa-sink"></i> Commercial Sinks</a></li>
+            <li><a href="#" class="menu-link-item"><i class="menu-cart-trigger"><i class="fa-solid fa-bag-shopping"></i> View Cart</i></a></li>
+            <li><a href="#" class="menu-link-item"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Shopping Cart Drawer Layer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart-btn" id="closeCart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-drawer-body" id="cartBody">
+            <!-- Dynamically Rendered Content goes here -->
+            <p class="cart-empty-msg">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-display">
+                <span>Total Amount:</span>
+                <span id="cartTotalText">KSh 0.00</span>
+            </div>
+            
+            <!-- Order Payable Config Section -->
+            <p class="payment-options-title">Select Mode of Payment</p>
+            <div class="payment-icons-container">
+                <div class="payment-method-card selected" data-method="M-Pesa">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>M-Pesa</span>
+                </div>
+                <div class="payment-method-card" data-method="Bank Transfer">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Bank Transfer</span>
+                </div>
+                <div class="payment-method-card" data-method="Cash">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span>Cash on Del.</span>
+                </div>
+            </div>
+
+            <button class="checkout-action-btn" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Main Global Site Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i> <span>MENU</span>
+            </button>
+            <div class="site-logo">
+                <a href="#">
+                    <span class="logo-bold">KARIUKI BILL AGALLA</span> FABRICATORS
+                    <small>& KITCHEN APPLIANCES</small>
+                </a>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="icon-link search-icon-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" class="icon-link global-cart-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge global-cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container Wrapper -->
+    <main class="main-content">
+        
+        <section class="product-showcase">
+            <nav class="breadcrumbs">
+                <a href="#">Home</a> / <a href="#">Gas Burners</a> / 3-Burner Low Pressure Gas Cooker
+            </nav>
+
+            <div class="product-container">
+                
+                <!-- Dynamic Gallery Image Switcher Component -->
+                <div class="product-gallery">
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop" alt="3-Burner Low Pressure Gas Cooker Front View" class="product-image" id="mainDisplayImg">
+                    </div>
+                </div>
+
+                <!-- Product Content Info Column -->
+                <div class="product-details">
+                    <h1 class="product-title" id="itemTitle">3-Burner Low Pressure Gas Cooker</h1>
+                    <div class="product-price" id="itemPrice" data-value="35000">KSh 40,000.00</div>
+                    <p class="product-description">
+                        Billy Agalla Fabricators heavy-duty stainless steel 3-burner low pressure gas cooker is precisely engineered for maximum heat efficiency, lifetime durability, and heavy commercial setups. Perfect for busy restaurants, schools, catering business facilities, and hotels.
+                    </p>
+
+                    <table class="specs-table">
+                        <tr>
+                            <td>Material</td>
+                            <td>Food-grade Stainless Steel (Rustproof)</td>
+                        </tr>
+                        <tr>
+                            <td>Burner Config</td>
+                            <td>3 Heavy-cast Iron Burner Heads</td>
+                        </tr>
+                        <tr>
+                            <td>Pressure Type</td>
+                            <td>Low Pressure System (Highly Economical)</td>
+                        </tr>
+                        <tr>
+                            <td>Application</td>
+                            <td>Commercial Hotels, Schools, & Catering Units</td>
+                        </tr>
+                    </table>
+
+                    <button class="add-to-cart-btn" id="addToCartActionBtn">
+                        <i class="fa-solid fa-cart-plus"></i> ADD TO CART
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Accordion UI Container Elements -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Do you offer custom-made stainless steel kitchen equipment?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>Yes, absolutely! We specialize in tailored industrial metal fabrication and can construct commercial catering gear matching your exact measurement dimensions, structural parameters, and layout design configurations.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    What types of clients do you serve?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>We supply high-caliber, food-grade industrial kitchen appliances across Kenya to schools, universities, hospitals, major hotels, corporate cafeterias, and independent catering setups.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    What materials do you use for fabrication?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>We consistently structuralize our gear using high-spec, thick-gauge premium stainless steel. This keeps your installations highly hygienic, completely rustproof, incredibly easy to sterilize, and rugged enough for aggressive daily use.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Structural Website Footer Setup -->
+        <footer class="site-footer">
+            <div class="footer-grid">
+                
+                <div class="contact-form-wrapper">
+                    <h3>SEND A DIRECT INQUIRY</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message or Custom Order Dimensions Specification Details..." rows="4" required></textarea>
+                        <button type="submit" class="submit-btn">SEND A MESSAGE</button>
+                    </form>
+                </div>
+
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <span class="logo-bold">KARIUKI BILL AGALLA</span> FABRICATORS
+                        <small>& KITCHEN APPLIANCES</small>
+                    </div>
+                    <p class="about-text">
+                        We are Kenya's choice manufacturer and supplier of heavy industrial stainless steel kitchen infrastructure. From heavy-duty burners and high-volume deep fryers to custom worktops and sinks, we fabricate excellence built to survive decades.
+                    </p>
+                    <ul class="contact-info-list">
+                        <li><i class="fa-solid fa-location-dot"></i> Kenyatta Road, Juja, Kiambu, Kenya</li>
+                        <li><i class="fa-solid fa-phone"></i> Phone: (+254) 141 375402</li>
+                        <li><i class="fa-solid fa-envelope"></i> Email: info@kariukibillfabrics.co.ke</li>
+                    </ul>
+                </div>
+
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Global App Bottom Sticky Nav Layer Menu -->
+    <div class="sticky-bottom-nav">
+        <button class="nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            <i class="fa-solid fa-house"></i>
+            <span>Shop</span>
+        </button>
+        <button class="nav-item" id="navWishlistBtn">
+            <i class="fa-solid fa-heart"></i>
+            <span class="badge-nav">0</span>
+            <span>Wishlist</span>
+        </button>
+        <button class="nav-item global-cart-trigger">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="badge-nav global-cart-badge">0</span>
+            <span>Cart</span>
+        </button>
+        <button class="nav-item" id="navAccountBtn">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </button>
+    </div>
+
+    <!-- Active WhatsApp Floating Element Interface -->
+    <a href="https://wa.me/254141375402?text=Hello%20Billy%20Agalla%20Fabricators,%20I%20am%20interested%20in%20the%203-Burner%20Low%20Pressure%20Gas%20Cooker." 
+       class="whatsapp-widget" 
+       target="_blank" 
+       id="whatsappFloatingWidget"
+       aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Interactive Component State JavaScript Engine -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Global Application State Management Layer
+            let cartItemsCount = 0;
+            const productPriceVal = parseInt(document.getElementById('itemPrice').getAttribute('data-value'));
+            const productTitleText = document.getElementById('itemTitle').innerText;
+            let currentSelectedPaymentMethod = "M-Pesa";
+
+            // Component Element Mappings
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const closeMenu = document.getElementById('closeMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            const cartDrawer = document.getElementById('cartDrawer');
+            const closeCart = document.getElementById('closeCart');
+            const cartBody = document.getElementById('cartBody');
+            const cartTotalText = document.getElementById('cartTotalText');
+            const globalCartBadges = document.querySelectorAll('.global-cart-badge');
+            
+            const addToCartActionBtn = document.getElementById('addToCartActionBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const paymentCards = document.querySelectorAll('.payment-method-card');
+
+            // --- Sidebar Toggle Controllers ---
+            function openNavDrawer() {
+                sidebarMenu.classList.add('open');
+                menuOverlay.classList.add('show');
+            }
+
+            function closeAllDrawers() {
+                sidebarMenu.classList.remove('open');
+                cartDrawer.classList.remove('open');
+                menuOverlay.classList.remove('show');
+            }
+
+            menuToggle.addEventListener('click', openNavDrawer);
+            closeMenu.addEventListener('click', closeAllDrawers);
+            menuOverlay.addEventListener('click', closeAllDrawers);
+
+            // Handle sidebar inner links to self-close
+            document.querySelectorAll('.menu-link-item').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if(!e.target.classList.contains('menu-cart-trigger')) {
+                        closeAllDrawers();
+                    }
+                });
+            });
+
+            // --- Shopping Cart Drawer Engines ---
+            function openCartDrawer() {
+                sidebarMenu.classList.remove('open');
+                cartDrawer.classList.add('open');
+                menuOverlay.classList.add('show');
+            }
+
+            document.querySelectorAll('.global-cart-trigger').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openCartDrawer();
+                });
+            });
+
+            document.querySelector('.menu-cart-trigger')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                openCartDrawer();
+            });
+
+            closeCart.addEventListener('click', closeAllDrawers);
+
+            // Update DOM UI elements dynamically matching checkout array status
+            function refreshCartUIState() {
+                globalCartBadges.forEach(badge => {
+                    badge.innerText = cartItemsCount;
+                });
+
+                if (cartItemsCount > 0) {
+                    const totalFormatted = (cartItemsCount * productPriceVal).toLocaleString();
+                    cartTotalText.innerText = `KSh ${totalFormatted}.00`;
+                    
+                    cartBody.innerHTML = `
+                        <div class="cart-item-row">
+                            <img src="${document.getElementById('mainDisplayImg').src}" class="cart-item-img" alt="Item Image">
+                            <div class="cart-item-info">
+                                <h4>${productTitleText}</h4>
+                                <p>${cartItemsCount} x KSh ${productPriceVal.toLocaleString()}.00</p>
+                            </div>
+                            <button class="remove-item-btn" id="decreaseQtyBtn"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    `;
+
+                    // Wire operational control on freshly added remove elements
+                    document.getElementById('decreaseQtyBtn').addEventListener('click', () => {
+                        cartItemsCount = 0;
+                        refreshCartUIState();
+                    });
+                } else {
+                    cartTotalText.innerText = "KSh 0.00";
+                    cartBody.innerHTML = `<p class="cart-empty-msg">Your cart is currently empty.</p>`;
+                }
+            }
+
+            // Trigger click simulation execution pipeline
+            addToCartActionBtn.addEventListener('click', () => {
+                cartItemsCount++;
+                refreshCartUIState();
+                openCartDrawer();
+            });
+
+            // --- Order Payable Icon Options Interaction logic ---
+            paymentCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    paymentCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    currentSelectedPaymentMethod = this.getAttribute('data-method');
+                });
+            });
+
+            // Process order to WhatsApp handler interface triggers
+            checkoutBtn.addEventListener('click', () => {
+                if(cartItemsCount === 0) {
+                    alert('Please add the cooker to your cart before proceeding to checkout.');
+                    return;
+                }
+                
+                const totalCalculated = (cartItemsCount * productPriceVal).toLocaleString();
+                const whatsappMsg = `Hello Billy Agalla Fabricators, I want to place an order:%0A%0A` +
+                                    `*Product:* ${productTitleText}%0A` +
+                                    `*Quantity:* ${cartItemsCount}%0A` +
+                                    `*Total Price:* KSh ${totalCalculated}.00%0A` +
+                                    `*Preferred Payment:* ${currentSelectedPaymentMethod}%0A%0APlease arrange delivery parameters.`;
+                
+                window.open(`https://wa.me/254141375402?text=${whatsappMsg}`, '_blank');
+            });
+
+            // --- Interactive Thumbnail Image Switcher System ---
+            const mainDisplayImg = document.getElementById('mainDisplayImg');
+            const thumbnails = document.querySelectorAll('.thumb-img');
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    mainDisplayImg.src = this.src;
+                });
+            });
+
+            // --- Accordion Event Toggles for FAQs ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const content = this.nextElementSibling;
+
+                    if (item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        content.style.maxHeight = null;
+                    } else {
+                        document.querySelectorAll('.accordion-item').forEach(i => {
+                            i.classList.remove('active');
+                            i.querySelector('.accordion-content').style.maxHeight = null;
+                        });
+
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // --- Supplementary UI Action Placeholders ---
+            document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for reaching out to Billy Agalla Fabricators! Your request has been delivered.');
+                e.target.reset();
+            });
+
+            document.getElementById('navWishlistBtn').addEventListener('click', () => alert('Item saved to Wishlist!'));
+            document.getElementById('navAccountBtn').addEventListener('click', () => alert('Account workspace integration coming soon.'));
+            document.querySelector('.search-icon-btn').addEventListener('click', () => alert('Search index pipeline is ready. Type query.'));
+        });
+    </script>
+</body>
+</html>
